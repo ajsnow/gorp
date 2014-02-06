@@ -86,13 +86,13 @@ func (d SqliteDialect) ToSqlType(val reflect.Type, maxsize int, isAutoIncr bool)
 	}
 
 	switch val.Name() {
-	case "NullableInt64":
+	case "NullInt64":
 		return "integer"
-	case "NullableFloat64":
+	case "NullFloat64":
 		return "real"
-	case "NullableBool":
+	case "NullBool":
 		return "integer"
-	case "NullableBytes":
+	case "NullBytes":
 		return "blob"
 	case "Time":
 		return "datetime"
@@ -180,13 +180,13 @@ func (d PostgresDialect) ToSqlType(val reflect.Type, maxsize int, isAutoIncr boo
 	}
 
 	switch val.Name() {
-	case "NullableInt64":
+	case "NullInt64":
 		return "bigint"
-	case "NullableFloat64":
+	case "NullFloat64":
 		return "double"
-	case "NullableBool":
+	case "NullBool":
 		return "smallint"
-	case "NullableBytes":
+	case "NullBytes":
 		return "bytea"
 	case "Time", "NullTime":
 		return "timestamp with time zone"
@@ -248,7 +248,7 @@ func (d PostgresDialect) QuoteField(f string) string {
 }
 
 func (d PostgresDialect) QuotedTableForQuery(schema string, table string) string {
-	if (strings.TrimSpace(schema) == "") {
+	if strings.TrimSpace(schema) == "" {
 		return d.QuoteField(table)
 	}
 
@@ -300,13 +300,13 @@ func (m MySQLDialect) ToSqlType(val reflect.Type, maxsize int, isAutoIncr bool) 
 	}
 
 	switch val.Name() {
-	case "NullableInt64":
+	case "NullInt64":
 		return "bigint"
-	case "NullableFloat64":
+	case "NullFloat64":
 		return "double"
-	case "NullableBool":
+	case "NullBool":
 		return "tinyint"
-	case "NullableBytes":
+	case "NullBytes":
 		return "mediumblob"
 	case "Time":
 		return "datetime"
