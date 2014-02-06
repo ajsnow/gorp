@@ -183,7 +183,7 @@ func (d PostgresDialect) ToSqlType(val reflect.Type, maxsize int, isAutoIncr boo
 	case "NullInt64":
 		return "bigint"
 	case "NullFloat64":
-		return "double"
+		return "double precision"
 	case "NullBool":
 		return "smallint"
 	case "NullBytes":
