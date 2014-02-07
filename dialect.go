@@ -174,6 +174,10 @@ func (d PostgresDialect) ToSqlType(val reflect.Type, maxsize int, isAutoIncr boo
 	case reflect.Float64, reflect.Float32:
 		return "real"
 	case reflect.Slice:
+		// Hack: PostgreSQL's native json type
+		if val.Name() == "Json" {
+			return "json"
+		}
 		if val.Elem().Kind() == reflect.Uint8 {
 			return "bytea"
 		}
@@ -190,6 +194,9 @@ func (d PostgresDialect) ToSqlType(val reflect.Type, maxsize int, isAutoIncr boo
 		return "bytea"
 	case "Time", "NullTime":
 		return "timestamp with time zone"
+	// Hack: PostgreSQL's ltree extension	type
+	case "Ltree":
+		return "ltree"
 	}
 
 	if maxsize > 0 {
